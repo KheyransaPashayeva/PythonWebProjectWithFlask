@@ -10,9 +10,16 @@ def home():
 @app.route('/demo',methods=['GET','POST'])
 def demo():
     if request.method=='POST':
-        pass
+        username=name=request.form['u_name']
+        conn=sqlite3.connect('project.db')
+        query=f"insert into Workers(username) values ('{username}')"
+        conn.execute(query)
+        conn.commit()
+        data=[]
+        for row in conn.execute('SELECT username FROM Workers'):
+            data.append(row)
+        return render_template('demo.html',context=data)
         
-   
     return render_template('demo.html')
 
 if __name__ == '__main__':
