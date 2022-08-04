@@ -22,5 +22,38 @@ def demo():
         
     return render_template('demo.html')
 
+def Select_user(id):
+    conn = sqlite3.connect('project.db')
+    c = conn.cursor()
+    c.execute(f"SELECT FROM Workers WHERE username = '{request.form['username']}' password = '{request.form['password']}'  id = {id}")
+    conn.commit()
+    conn.close()
+    return render_template('demo.html')
+
+
+def delete_user(id):
+    conn = sqlite3.connect('project.db')
+    c = conn.cursor()
+    c.execute(f"DELETE FROM Workers WHERE id = {id}")
+    conn.commit()
+    conn.close()
+    session.clear()
+    session['error'] = 'User deleted'
+    
+    return render_template('demo.html')
+
+
+
+def update_user(id):
+    conn = sqlite3.connect('project.db')
+    c = conn.cursor()
+    c.execute(f"UPDATE Workers SET username = '{request.form['username']}', password = '{request.form['password']}' WHERE id = {id}")
+    conn.commit()
+    conn.close()
+    session['is_logged_in'] = False
+    session['error'] = 'User updated successfully'
+    return render_template('demo.html')
+
+
 if __name__ == '__main__':
     app.run(port=5000,debug=True)
