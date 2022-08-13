@@ -1,8 +1,18 @@
 from flask import Flask,redirect,url_for,render_template,request
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
 
 app=Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
+db = SQLAlchemy(app)
+
+class Messages(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    subject = db.Column(db.String(120),nullable=False)
+    message = db.Column(db.String(220),nullable=False)
+    
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -22,38 +32,17 @@ def demo():
         
     return render_template('demo.html')
 
-def Select_user(id):
-    conn = sqlite3.connect('project.db')
-    c = conn.cursor()
-    c.execute(f"SELECT FROM Workers WHERE username = '{request.form['username']}' password = '{request.form['password']}'  id = {id}")
-    conn.commit()
-    conn.close()
-    return render_template('demo.html')
-
-
-def delete_user(id):
-    conn = sqlite3.connect('project.db')
-    c = conn.cursor()
-    c.execute(f"DELETE FROM Workers WHERE id = {id}")
-    conn.commit()
-    conn.close()
-    session.clear()
-    session['error'] = 'User deleted'
-    
-    return render_template('demo.html')
-
-
-
-def update_user(id):
-    conn = sqlite3.connect('project.db')
-    c = conn.cursor()
-    c.execute(f"UPDATE Workers SET username = '{request.form['username']}', password = '{request.form['password']}' WHERE id = {id}")
-    conn.commit()
-    conn.close()
-    session['is_logged_in'] = False
-    session['error'] = 'User updated successfully'
-    return render_template('demo.html')
-
+@app.route('/contact',methods=['GET','POST'])
+def contact():
+    if request.method=='POST':
+        name=request.form['name']
+        email=request.form['email']
+        subject=request.form['subject']
+        message=request.form['message']
+        msj=Messages(name=name,email=email,subject=subject,message=message)
+        db.session.add(msj)
+        db.session.commit()
+    return render_template('contact.html')
 
 if __name__ == '__main__':
     app.run(port=5000,debug=True)
