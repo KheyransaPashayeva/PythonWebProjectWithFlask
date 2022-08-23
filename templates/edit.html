@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+ <h1 style="width: 100%">
+    Edit 's Details
+ 
+</h1>
+<form method="post">
+    <p>
+        <label for="name">Name</label>
+        <input type="text" name="name"
+               value={{ msj.name }}
+               placeholder="Name">
+        </input>
+    </p>
+
+ 
+    <p >
+        <label for="email">Email</label>
+        <input type="email" name="email"
+               value={{ msj.email }}
+               placeholder=" email">
+        </input>
+    </p>
+
+    <p>
+        <label for="message">Message</label>
+    <br>
+    <textarea name="message"
+              placeholder="message"
+              rows="15"
+              cols="60"
+              >{{ msj.message }}</textarea>
+    </p>
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+</form>
+</body>
+</html>
