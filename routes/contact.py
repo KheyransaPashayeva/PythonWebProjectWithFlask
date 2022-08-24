@@ -51,3 +51,8 @@ def delete(id):
     db.session.commit()
     
     return redirect('/messages')
+
+
+@app.route('/')
+def home():
+    return render_template('index.html')
