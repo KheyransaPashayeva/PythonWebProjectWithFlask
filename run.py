@@ -8,7 +8,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 from models import *
 from app.routes.contact import *
-
+from admin.routes.loginlogout import *
 
 
 
