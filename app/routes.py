@@ -18,7 +18,7 @@ def contact():
 @app.route('/messages',methods=['GET','POST'])
 def messages():
     from models import Messages,Users,db
-    user=Users.query.all()
+    user=Users.query.filter_by(is_active=True).first()
     if user.is_active==True:
        mesaj=Messages.query.all()
        return render_template('admin/messages.html',mesaj=mesaj)
@@ -51,4 +51,3 @@ def delete(id):
     db.session.commit()
     
     return redirect('/messages')
-

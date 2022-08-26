@@ -6,10 +6,10 @@ app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-from models import *
-from app.routes.contact import *
-from admin.routes.loginlogout import *
 
+from app.routes import *
+from admin.routes import *
+from models import *
 
 
 if __name__ == '__main__':
