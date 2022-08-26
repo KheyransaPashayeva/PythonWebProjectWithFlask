@@ -16,17 +16,25 @@
     <p>
         <label for="name">Name</label>
         <input type="text" name="name"
-               value={{ msj.name }}
+               value={{ mesaj.name }}
                placeholder="Name">
         </input>
     </p>
 
- 
     <p >
         <label for="email">Email</label>
         <input type="email" name="email"
-               value={{ msj.email }}
+               value={{ mesaj.email }}
                placeholder=" email">
+        </input>
+    </p>
+
+
+    <p >
+        <label for="subject">Subject</label>
+        <input type="subject" name="subject"
+               value={{ mesaj.subject }}
+               placeholder="subject">
         </input>
     </p>
 
@@ -37,11 +45,12 @@
               placeholder="message"
               rows="15"
               cols="60"
-              >{{ msj.message }}</textarea>
+              >{{ mesaj.message }}</textarea>
     </p>
     <p>
         <button type="submit">Submit</button>
     </p>
 </form>
+<a href="/logout" class="btn btn-primary" >Logout</a>
 </body>
 </html>

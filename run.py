@@ -7,7 +7,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 from models import *
-from routes.contact import *
+from app.routes.contact import *
+
 
 
 

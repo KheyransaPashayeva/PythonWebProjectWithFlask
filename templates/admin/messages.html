@@ -25,16 +25,18 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Subject</th>
                     <th scope="col">Message</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {% for message in msj %}
+                    {% for message in mesaj %}
                   <tr>
                     <td>{{message.id}}</td>
                     <td style="padding-right: 20px">  {{message.name}}</td>
                     <td style="padding-right: 20px">  {{message.email}}</td>
+                    <td style="padding-right: 20px">  {{message.subject}}</td>
                     <td style="padding-right: 20px">  {{message.message}}</td>
                     <td>
                         <a href="/update/{{message.id}}" style="padding-right: 10px">Update</a>
@@ -44,6 +46,7 @@
                   {% endfor %}
                  
                 </tbody>
+                <a href="/logout" class="btn btn-primary" >Logout</a>
               </table>
           </div>
 
