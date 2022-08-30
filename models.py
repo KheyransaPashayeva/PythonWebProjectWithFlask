@@ -1,4 +1,4 @@
-from run import app,db
+from run import main,db
 import datetime
 
 #contactdan geden msjlar
@@ -8,7 +8,7 @@ class Messages(db.Model):
     email = db.Column(db.String(120), nullable=False)
     subject = db.Column(db.String(120))
     message = db.Column(db.Text(220))
-   # message_date = db.Column(db.String(120))
+    message_date = db.Column(db.String(120))
     
 #saytin Navbar hissesi
 class NavBar(db.Model):
