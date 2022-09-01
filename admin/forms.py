@@ -8,3 +8,9 @@ class MessagesForm(FlaskForm):
     message=TextAreaField('Message')
     message_date=DateField('message_date')
     submit=SubmitField('Add message')
+
+class ServiceForm(FlaskForm):
+    service_title=StringField('ServiceTitle')
+    service_img=StringField('ServiceIMG')
+    service_text=TextAreaField('ServiceText')
+    submit=SubmitField('Add service')

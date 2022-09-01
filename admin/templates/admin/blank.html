@@ -1,0 +1,47 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Blank Page</h3>
+                        </div>
+                        <form  action="/admin/service/create" method="post">
+                            {{serviceForm.service_title(class_="form conrtol my-3",placeholder='Service Title')}}
+                            {{serviceForm.service_img(class_="form conrtol my-3",placeholder='Service Image')}}
+                            {{serviceForm.service_text(class_="form conrtol my-3",placeholder='Service Text')}}
+                            {{serviceForm.submit(class_="btn btn-primary my-3",valies='Add service')}}
+                         </form>
+                         <table class="table table-striped">
+                    
+                                <thead>
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">ServiceTitle</th>
+                                    <th scope="col">ServiceImg</th>
+                                    <th scope="col">ServiceText</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                 {% for service in services %}
+                                  <tr>
+                                    <th scope="row">{{service.id}}</th>
+                                    <td colspan="2">{{service.service_title}}</td>
+                                    <td>{{serviceForm.service_img}}</td>
+                                  </tr>
+                                {% endfor %}
+                                </tbody>
+                              </table>
+                          
+                    </div>
+                </div>
+{% endblock %}

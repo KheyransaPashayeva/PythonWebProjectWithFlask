@@ -40,7 +40,7 @@ class AboutIcon(db.Model):
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     service_title = db.Column(db.String(180), unique=True, nullable=False)
-    service_text = db.Column(db.String(220))
+    service_text = db.Column(db.Text)
     service_img = db.Column(db.String(120))
     
     
