@@ -25,20 +25,17 @@ def admin_message_create():
     return render_template('admin/message_create.html',messageForm=messageForm)
 
 
-@admin_bp.route('/service/create',methods=['GET','POST'])
+@admin_bp.route('/service',methods=['GET','POST'])
 def admin_service_create():
     serviceForm=ServiceForm()
     from run import db
     from models import Services
     services=Services.query.all()
     if request.method=='POST':
-        service=Services(
-            service_title=serviceForm.service_title.data,
-            service_img=serviceForm.service_img.data,
-            service_text=serviceForm.service_text.data
-        )
-        
+        service_title=serviceForm.service_title.data
+        service_img=serviceForm.service_img.data
+        service_text=serviceForm.service_text.data
+        service=Services(service_title=service_title,service_img=service_img,service_text=service_text )
         db.session.add(service)
         db.session.commit()
-        return redirect('/service/create')
     return render_template('admin/blank.html',serviceForm=serviceForm,services=services)
