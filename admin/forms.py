@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,EmailField,DateField,PasswordField,SubmitField,TextAreaField
+from wtforms import StringField,EmailField,DateField,PasswordField,SubmitField,TextAreaField,IntegerField,BooleanField
 
 class MessagesForm(FlaskForm):
     name=StringField('Name')
@@ -14,3 +14,10 @@ class ServiceForm(FlaskForm):
     service_img=StringField('ServiceIMG')
     service_text=TextAreaField('ServiceText')
     submit=SubmitField('Add service')
+    
+class NavbarLinkForm(FlaskForm):
+    navbar_name=StringField('NavlinkrName')
+    navbar_url=StringField('NavlinkUrl')
+    navbar_order=IntegerField('NavlinkOrder')
+    is_active=BooleanField('Is Active')
+    submit=SubmitField('Add navlink')

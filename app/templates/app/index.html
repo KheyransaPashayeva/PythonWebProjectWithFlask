@@ -53,29 +53,13 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a class="get-a-quote" href="get-a-quote.html">Get a Quote</a></li>
+
+        {% for navbar in navbarlink %}
+        <li><a href="{{navbar.navbar_url}}" class="active">{{navbar.navbar_name}}</a></li>
+        
+        {% endfor %}
+    
+        
         </ul>
       </nav><!-- .navbar -->
 
@@ -232,66 +216,19 @@
         </div>
 
         <div class="row gy-4">
-
+            {% for service in services %}
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="card">
               <div class="card-img">
-                <img src="./app/static/assets/img/storage-service.jpg" alt="" class="img-fluid">
+                <img src="{{service.service_img}}" alt="" class="img-fluid">
               </div>
-              <h3><a href="service-details.html" class="stretched-link">Storage</a></h3>
-              <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam repellendus temporibus itaqueofficiis odit</p>
+              <h3><a href="service-details.html" class="stretched-link">{{service.service_title}}</a></h3>
+              <p>{{service.service_text}}</p>
             </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-img">
-                <img src="./app/static/assets/img/logistics-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Logistics</a></h3>
-              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae dolor ipsam ducimus occaecati nisi</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <div class="card-img">
-                <img src="./app/static/assets/img/cargo-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Cargo</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card">
-              <div class="card-img">
-                <img src="./app/static/assets/img/trucking-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Trucking</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="card">
-              <div class="card-img">
-                <img src="./app/static/assets/img/packaging-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
-              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores beatae consequatur magni voluptates</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="card">
-              <div class="card-img">
-                <img src="./app/static/assets/img/warehousing-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Warehousing</a></h3>
-              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut nostrum unde et qui est non quo nulla</p>
-            </div>
-          </div><!-- End Card Item -->
+          </div>
+          <!-- End Card Item -->
+          {% endfor %}
+      
 
         </div>
 

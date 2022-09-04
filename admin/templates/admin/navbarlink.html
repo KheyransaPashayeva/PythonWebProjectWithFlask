@@ -1,0 +1,60 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add Navbarlink</h5>
+    <p class="card-text"> 
+      <form action='/admin/navbarlink' method='POST'>
+              {{navbarLinkForm.navbar_name(class_="form-control my-3 ",placeholder='Navbar Name ')}}
+              {{navbarLinkForm.navbar_url(class_="form-control my-3 ",placeholder='Navbar url ')}}
+              {{navbarLinkForm.navbar_order(class_="form-control my-3 ",placeholder='Navbar order')}}
+
+              <div class="input-group mb-3">
+                <label class="form-check-label" for-"flexCheckDefault">
+                  {{navbarLinkForm.is_active(class_="form-check-input mt-0",type="checkbox")}}
+                  Is Active?
+                </lable>
+              </div>
+              {{navbarLinkForm.submit(class_="btn btn-primary ",value='Add service')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Navbar list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Navbarlink Name</th>
+            <th scope="col">Navbarlink url</th>
+            <th scope="col">Navbarlink order</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for navbar in navbarlinks %}
+          <tr>
+            <td>{{navbar.id}}</td>
+            <td>{{navbar.navbar_name}}</td>
+            <td>{{navbar.navbar_url}}</td>
+            <td>{{navbar.navbar_order}}</td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/navbarlink/delete/{{navbar.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/navbarlink/update/{{navbar.id}}'>Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

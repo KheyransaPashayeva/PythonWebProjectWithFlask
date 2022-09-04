@@ -6,9 +6,9 @@
     <h5 class="card-title">Add Service</h5>
     <p class="card-text"> 
       <form action='/admin/service' method='POST'>
-              {{serviceForm.service_title(class_="form conrtol my-3 ",placeholder='Service Title')}}
-              {{serviceForm.service_img(class_="form conrtol my-3 ",placeholder='Service Image')}}
-              {{serviceForm.service_text(class_="form conrtol my-3 ",placeholder='Service Text')}}
+              {{serviceForm.service_title(class_="form-control my-3 ",placeholder='Service Title')}}
+              {{serviceForm.service_img(class_="form-control my-3 ",placeholder='Service Image')}}
+              {{serviceForm.service_text(class_="form-control my-3 ",placeholder='Service Text')}}
               {{serviceForm.submit(class_="btn btn-primary ",valies='Add service')}}
       </form>
     </p>
@@ -27,14 +27,20 @@
             <th scope="col">ServiceTitle</th>
             <th scope="col">ServiceImage</th>
           </tr>
+         
         </thead>
         <tbody>
         {% for service in services %}
           <tr>
-            <td >{{service.id}}</td>
-            <td >{{service.service_title}}</td>
-            <td >{{service.service_img}}</td>
+            <td>{{service.id}}</td>
+            <td>{{service.service_title}}</td>
+            <td>{{service.service_img}}</td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/service/delete/{{service.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/service/update/{{service.id}}'>Update </a>
+            <td>
           </tr>
+        
           {% endfor %}
         </tbody>
       </table>

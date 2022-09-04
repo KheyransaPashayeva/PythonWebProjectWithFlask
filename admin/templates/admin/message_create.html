@@ -13,67 +13,12 @@
  
 </h1>
 <form  action="/admin/messages/create" method="post">
-   {{messageForm.name(class_="form conrtol my-3",placeholder='Your Name')}}
-   {{messageForm.email(class_="form conrtol my-3",placeholder='Your Email')}}
-   {{messageForm.subject(class_="form conrtol my-3",placeholder='Subject')}}
-   {{messageForm.message(class_="form conrtol my-3",placeholder='Message')}}
+   {{messageForm.name(class_="form-control my-3",placeholder='Your Name')}}
+   {{messageForm.email(class_="form-control my-3",placeholder='Your Email')}}
+   {{messageForm.subject(class_="form-control my-3",placeholder='Subject')}}
+   {{messageForm.message(class_="form-control my-3",placeholder='Message')}}
    {{messageForm.submit(class_="btn btn-primary my-3",valies='Add message')}}
 </form>
 <a href="/logout" class="btn btn-primary" >Logout</a>
 </body>
 </html>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-             
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Add Service</h5>
-                    <p class="card-text"></p>
-                      <form  action="/admin/service" method="post">
-                        {{serviceForm.service_title(class_="form conrtol my-3",placeholder='Service Title')}}
-                        {{serviceForm.service_img(class_="form conrtol my-3",placeholder='Service Image')}}
-                        {{serviceForm.service_text(class_="form conrtol my-3",placeholder='Service Text')}}
-                        {{serviceForm.submit(class_="btn btn-primary my-3",valies='Add service')}}
-                    </form>
-
-                    
-
-                  </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                         <div class="white-box">
-                                  <h3 class="box-title">Blank Page</h3>
-                         </div>
-                           
-                              <table class="table table-striped">
-                    
-                                <thead>
-                                  <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">ServiceTitle</th>
-                                    <th scope="col">ServiceImg</th>
-                                  </tr>
-                                </thead>
-                               
-                                 {% for service in services %}
-                                  <tr>
-                                    <th scope="row">{{service.id}}</th>
-                                    <th scope="row">{{service.service_title}}</th>
-                                    <th scope="row">{{serviceForm.service_img}}</th>
-                                  </tr>
-                                {% endfor %}
-                               
-                              </table>
-                     </div>
-                </div>
-          </div>
