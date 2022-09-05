@@ -144,16 +144,17 @@ def admin_testimonials():
             file=request.files['img']
             filename=secure_filename(file.filename)
             extension=filename.rsplit('.',1)[1]
-            new_filename=f"Tester{random.randint(1,1000)}.{extension}"
-            file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
-            name=testimonialsForm.name.data
-            info=testimonialsForm.info.data
-            img=new_filename
-            profession=testimonialsForm.profession.data
-            order=testimonialsForm.order.data
-            isActive=testimonialsForm.isActive.data
-            testimonial=Testimonials(name=name,info=info,img=img,order=order,isActive=isActive,profession=profession)
-            db.session.add(testimonial)
-            db.session.commit()
+            if extension=='jpg' or extension=='png':
+                new_filename=f"Tester{random.randint(1,1000)}.{extension}"
+                file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
+                name=testimonialsForm.name.data
+                info=testimonialsForm.info.data
+                img=new_filename
+                profession=testimonialsForm.profession.data
+                order=testimonialsForm.order.data
+                isActive=testimonialsForm.isActive.data
+                testimonial=Testimonials(name=name,info=info,img=img,order=order,isActive=isActive,profession=profession)
+                db.session.add(testimonial)
+                db.session.commit()
             return redirect('/admin/testimonials')
     return render_template('admin/testimonials.html',testimonialsForm=testimonialsForm,testimonials=testimonials)
