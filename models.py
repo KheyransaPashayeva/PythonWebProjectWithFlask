@@ -29,7 +29,24 @@ class AboutUs(db.Model):
     about_title = db.Column(db.String(180), unique=True, nullable=False)
     about_text = db.Column(db.String(220))
     about_video = db.Column(db.String(120))
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(180), nullable=False)
+    employee_img = db.Column(db.String(220))
+    position = db.Column(db.String(120))  
+    info= db.Column(db.Text)
+    order=db.Column(db.Integer)
+    is_active=db.Column(db.Boolean)
     
+class Testimonials(db.Model):
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    name=db.Column(db.String(80))
+    profession=db.Column(db.String(80))
+    info=db.Column(db.Text)
+    img=db.Column(db.String(80))
+    order=db.Column(db.Integer)
+    isActive=db.Column(db.Boolean)
 
     
 class AboutIcon(db.Model):

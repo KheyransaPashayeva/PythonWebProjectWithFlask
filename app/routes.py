@@ -4,10 +4,11 @@ from app import app_bp
 @app_bp.route('/')
 def app_index():
     from run import db
-    from models import NavBar,Services
+    from models import NavBar,Services,Testimonials
     navbarlink=NavBar.query.all()
     services=Services.query.all()
-    return render_template('app/index.html',navbarlink=navbarlink,services=services)
+    testimonials=Testimonials.query.all()
+    return render_template('app/index.html',navbarlink=navbarlink,services=services,testimonials=testimonials)
 
 @app_bp.route('/contact')
 def app_contact():
@@ -19,9 +20,11 @@ def app_contact():
 @app_bp.route('/about')
 def app_about():
     from run import db
-    from models import NavBar
+    from models import NavBar,Team,Testimonials
     navbarlink=NavBar.query.all()
-    return render_template('app/about.html',navbarlink=navbarlink)
+    teams=Team.query.all()
+    testimonials=Testimonials.query.all()
+    return render_template('app/about.html',navbarlink=navbarlink,teams=teams,testimonials=testimonials)
 
 @app_bp.route('/service')
 def app_service():

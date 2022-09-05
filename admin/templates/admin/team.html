@@ -1,0 +1,67 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add new Team</h5>
+    <p class="card-text"> 
+      <form action='/admin/team' method='POST' enctype="multipart/form-data">
+              {{teamForm.name(class_="form-control my-3 ",placeholder='Team Name ')}}
+              {{teamForm.employee_img(class_="form-control my-3 ",placeholder='Team image')}}
+              {{teamForm.position(class_="form-control my-3 ",placeholder='Team position ')}}
+              {{teamForm.info(class_="form-control my-3 ",placeholder='Team info')}}
+              {{teamForm.order(class_="form-control my-3 ",placeholder='Team order')}}
+
+              <div class="input-group mb-3">
+                <label class="form-check-label" for-"flexCheckDefault">
+                  {{teamForm.is_active(class_="form-check-input mt-0",type="checkbox")}}
+                  Is Active?
+                </lable>
+              </div>
+              {{teamForm.submit(class_="btn btn-primary ",value='Add team')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Team list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Team Name</th>
+            <th scope="col">Team position</th>           
+            <th scope="col">Team image</th>
+            <th scope="col">Team order</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for team in teams %}
+          <tr>
+            <td>{{team.id}}</td>
+            <td>{{team.name}}</td>
+            <td>{{team.position}}</td>
+            <td>
+             <img src='/static/uploads/{{team.employee_img}}' class='img-thumbnail' style='width:100px; heigth:100px; object-fit:cover'>
+            </td>
+            <td>{{team.order}}</td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/team/delete/{{team.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/team/update/{{team.id}}'>Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

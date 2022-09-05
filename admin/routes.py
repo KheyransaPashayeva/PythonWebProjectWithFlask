@@ -1,6 +1,10 @@
 from flask import Flask,redirect,url_for,render_template,request
 from admin import admin_bp
-from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm
+from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm
+import os
+from werkzeug.utils import secure_filename
+import random
+
 
 @admin_bp.route('/')
 def admin_index():
@@ -71,6 +75,7 @@ def admin_service_delete(id):
 #         return redirect('/admin/service')
 #     return render_template('admin/service.html',service=service,serviceForm=serviceForm)
 
+
 # APp de Navbar hissenin dinamikliyi
 @admin_bp.route('/navbarlink',methods=['GET','POST'])
 def admin_navbarlink_create():
@@ -98,3 +103,57 @@ def admin_navbarlink_delete(id):
     db.session.delete(navbarlink)
     db.session.commit()
     return redirect('/admin/navbarlink')
+
+# Navbar end
+
+# Team route start
+@admin_bp.route('/team',methods=['GET','POST'])
+def admin_team_create():
+    teamForm=TeamForm()
+    from run import db,main
+    from models import Team
+    teams=Team.query.all()
+    if request.method=='POST':
+        file=request.files['employee_img']
+        filename=secure_filename(file.filename)
+        extension=filename.rsplit('.',1)[1]
+        new_filename=f"Employe{random.randint(1,1000)}.{extension}"
+        file.save(main.config["UPLOAD_FOLDER"],new_filename)
+        name=teamForm.name.data
+        employee_img=new_filename
+        position=teamForm.position.data
+        info=teamForm.info.data
+        order=teamForm.order.data
+        is_active=teamForm.is_active.data
+        team=Team(name=name,employee_img=employee_img,position=position,info=info,order=order,is_active=is_active)
+        db.session.add(team)
+        db.session.commit()
+        return redirect('/admin/team')
+    return render_template('admin/team.html',teamForm=teamForm,teams=teams)
+
+# team end
+
+
+@admin_bp.route('/testimonials',methods=['GET','POST'])
+def admin_testimonials():
+    from run import db,main
+    from models import Testimonials
+    testimonials=Testimonials.query.all()
+    testimonialsForm=TestimonialsForm()
+    if request.method=="POST":
+            file=request.files['img']
+            filename=secure_filename(file.filename)
+            extension=filename.rsplit('.',1)[1]
+            new_filename=f"Tester{random.randint(1,1000)}.{extension}"
+            file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
+            name=testimonialsForm.name.data
+            info=testimonialsForm.info.data
+            img=new_filename
+            profession=testimonialsForm.profession.data
+            order=testimonialsForm.order.data
+            isActive=testimonialsForm.isActive.data
+            testimonial=Testimonials(name=name,info=info,img=img,order=order,isActive=isActive,profession=profession)
+            db.session.add(testimonial)
+            db.session.commit()
+            return redirect('/admin/testimonials')
+    return render_template('admin/testimonials.html',testimonialsForm=testimonialsForm,testimonials=testimonials)
