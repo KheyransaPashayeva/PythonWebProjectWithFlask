@@ -7,6 +7,7 @@ main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 main.config['SECRET_KEY']="secretkey"
 UPLOAD_FOLDER = './static/uploads/'
 main.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+main.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  #1mb limiti tetbiq edirik
 db=SQLAlchemy(main)
 migrate=Migrate(main, db)
 from app import app_bp

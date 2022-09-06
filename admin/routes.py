@@ -118,7 +118,7 @@ def admin_team_create():
         filename=secure_filename(file.filename)
         extension=filename.rsplit('.',1)[1]
         new_filename=f"Employe{random.randint(1,1000)}.{extension}"
-        file.save(main.config["UPLOAD_FOLDER"],new_filename)
+        file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
         name=teamForm.name.data
         employee_img=new_filename
         position=teamForm.position.data
@@ -131,6 +131,15 @@ def admin_team_create():
         return redirect('/admin/team')
     return render_template('admin/team.html',teamForm=teamForm,teams=teams)
 
+@admin_bp.route('/team/delete/<int:id>',methods=['GET','POST'])
+def admin_team_delete(id):
+    from run import db
+    from models import Team
+    teams=Team.query.get(id)
+    db.session.delete(teams)
+    db.session.commit()
+    return redirect('/admin/team')
+
 # team end
 
 
@@ -142,11 +151,15 @@ def admin_testimonials():
     testimonialsForm=TestimonialsForm()
     if request.method=="POST":
             file=request.files['img']
+            #seklin olcusunu tapmaq ucun yazdiq ve rahat olsun deye printde verdi
             filename=secure_filename(file.filename)
             extension=filename.rsplit('.',1)[1]
-            if extension=='jpg' or extension=='png':
+            if extension=='jpg' or extension=='png': #burda da jpg ve png sonluqlu fileler daxil edilmesini temin edir.
+                # ikinci bir usul ALLOWED_EXTENSIONS = {'png', 'jpg'} sekilde run.pyde yazib  route da if  extinsion in ALLOWED_EXTENSIONS yaza bilerik
                 new_filename=f"Tester{random.randint(1,1000)}.{extension}"
                 file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
+                poto_size = os.stat(main.config["UPLOAD_FOLDER"]).st_size
+                print(poto_size)
                 name=testimonialsForm.name.data
                 info=testimonialsForm.info.data
                 img=new_filename
@@ -158,3 +171,12 @@ def admin_testimonials():
                 db.session.commit()
             return redirect('/admin/testimonials')
     return render_template('admin/testimonials.html',testimonialsForm=testimonialsForm,testimonials=testimonials)
+
+@admin_bp.route('/testimonials/delete/<int:id>',methods=['GET','POST'])
+def admin_testimonial_delete(id):
+    from run import db
+    from models import Testimonials
+    testimonials=Testimonials.query.get(id)
+    db.session.delete(testimonials)
+    db.session.commit()
+    return redirect('/admin/testimonials')
