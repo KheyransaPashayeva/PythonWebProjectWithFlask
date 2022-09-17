@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add Transport</h5>
+    <p class="card-text"> 
+      <form action='/admin/transport' method='POST'>
+              {{transportForm.transport_title(class_="form-control my-3 ",placeholder='Transport Title')}}
+              {{transportForm.transport_img(class_="form-control my-3 ",placeholder='Transport Image')}}
+              {{transportForm.transport_text(class_="form-control my-3 ",placeholder='Transport Text')}}
+              {{transportForm.transport_url(class_="form-control my-3 ",placeholder='Transport Url')}}
+              {{transportForm.submit(class_="btn btn-primary ",valies='Add transport')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Transport list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">TransportTitle</th>
+            <th scope="col">TransportImage</th>
+            <th scope="col">TransportUrl</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for transport in transports %}
+          <tr>
+            <td>{{transport.id}}</td>
+            <td>{{transport.transport_title}}</td>
+            <td>{{transport.transport_img}}</td>
+            <td>{{transport.transport_url}}</td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/transport/delete/{{transport.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/transport/update/{{transport.id}}'>Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

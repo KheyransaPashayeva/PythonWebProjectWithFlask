@@ -1,6 +1,6 @@
 from flask import Flask,redirect,url_for,render_template,request
 from admin import admin_bp
-from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm
+from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm
 import os
 from werkzeug.utils import secure_filename
 import random
@@ -180,3 +180,22 @@ def admin_testimonial_delete(id):
     db.session.delete(testimonials)
     db.session.commit()
     return redirect('/admin/testimonials')
+
+
+# app indexinde olan transport bolmesine yenisini elave etmek
+@admin_bp.route('/transport',methods=['GET','POST'])
+def admin_transport_create():
+    transportForm=TransportForm()
+    from run import db
+    from models import Transport
+    transports=Transport.query.all()
+    if request.method=='POST':
+        transport_title=transportForm.transport_title.data
+        transport_img=transportForm.transport_img.data
+        transport_text=transportForm.transport_text.data
+        transport_url=transportForm.transport_url.data
+        transport=Transport(transport_title=transport_title,transport_img=transport_img,transport_text=transport_text,transport_url=transport_url )
+        db.session.add(transport)
+        db.session.commit()
+        return redirect('/admin/transport')
+    return render_template('admin/transport.html',transportForm=transportForm,transports=transports)

@@ -40,3 +40,12 @@ class TestimonialsForm(FlaskForm):
     order=IntegerField('Order')
     isActive=BooleanField('Is Active')
     submit=SubmitField('Add Testimonial')
+    
+    
+class TransportForm(FlaskForm):
+    transport_title=StringField('TransportTitle')
+    transport_text=TextAreaField('TransportText')
+    transport_img=StringField('TransportIMG')
+    transport_url=StringField('TransportUrl')
+    submit=SubmitField('Add transport')
+    

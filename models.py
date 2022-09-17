@@ -23,6 +23,7 @@ class Transport(db.Model):
     transport_title = db.Column(db.String(180), unique=True, nullable=False)
     transport_text = db.Column(db.String(220), nullable=False)
     transport_img = db.Column(db.String(120), nullable=False)
+    transport_url = db.Column(db.String(120), nullable=False)
     
 class AboutUs(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)

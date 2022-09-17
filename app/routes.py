@@ -4,11 +4,12 @@ from app import app_bp
 @app_bp.route('/')
 def app_index():
     from run import db
-    from models import NavBar,Services,Testimonials
+    from models import NavBar,Services,Testimonials,Transport
     navbarlink=NavBar.query.all()
     services=Services.query.all()
     testimonials=Testimonials.query.all()
-    return render_template('app/index.html',navbarlink=navbarlink,services=services,testimonials=testimonials)
+    transports=Transport.query.all()
+    return render_template('app/index.html',navbarlink=navbarlink,services=services,testimonials=testimonials,transports=transports)
 
 @app_bp.route('/contact')
 def app_contact():
@@ -34,17 +35,11 @@ def app_service():
     services=Services.query.all()
     return render_template('app/services.html',navbarlink=navbarlink,services=services)
 
-@app_bp.route('/service_detail/<int:id>',methods=['GET','POSt'])
+@app_bp.route('/service-detail/<int:id>', methods=['GET','POST'])
 def app_service_detail(id):
     from run import db
-    from models import NavBar,Services
+    from models import Services,NavBar
     navbarlink=NavBar.query.all()
     services=Services.query.get(id)
-    return render_template('app/service-detail.html',navbarlink=navbarlink,services=services)
+    return render_template('app/service-details.html',navbarlink=navbarlink,services=services)
 
-@app_bp.route('/pricing')
-def app_pricing():
-    from run import db
-    from models import NavBar
-    navbarlink=NavBar.query.all()
-    return render_template('app/pricing.html',navbarlink=navbarlink)
