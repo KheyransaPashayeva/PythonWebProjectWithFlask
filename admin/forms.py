@@ -30,6 +30,8 @@ class TeamForm(FlaskForm):
     order=IntegerField('Order')
     is_active=BooleanField('Is Active')
     submit=SubmitField('Add Employee')
+
+class TeamGalleryForm(FlaskForm):
     
 
 class TestimonialsForm(FlaskForm):

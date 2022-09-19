@@ -99,11 +99,14 @@ def admin_team_create():
     from models import Team
     teams=Team.query.all()
     if request.method=='POST':
+        file=request.form['name']
+        team_folder = os.path.join(main.config['UPLOAD_FOLDER'], file)
+        os.mkdir(team_folder)
         file=request.files['employee_img']
         filename=secure_filename(file.filename)
         extension=filename.rsplit('.',1)[1]
         new_filename=f"Employe{random.randint(1,1000)}.{extension}"
-        file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
+        file.save(os.path.join(team_folder,new_filename))
         name=teamForm.name.data
         employee_img=new_filename
         position=teamForm.position.data
@@ -163,8 +166,12 @@ def admin_testimonials():
 
 @admin_bp.route('/testimonials/delete/<int:id>',methods=['GET','POST'])
 def admin_testimonial_delete(id):
-    from run import db
+    from run import db,main
     from models import Testimonials
+    testimonial=db.session.execute(db.select(Testimonials.img).filter_by(id=id)).one() 
+    testimonial=list(testimonial)
+    testimonial_img=testimonial[0]
+    os.remove(os.path.join(main.config["UPLOAD_FOLDER"], testimonial_img))
     testimonials=Testimonials.query.get(id)
     db.session.delete(testimonials)
     db.session.commit()

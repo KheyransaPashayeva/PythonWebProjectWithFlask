@@ -39,6 +39,12 @@ class Team(db.Model):
     info= db.Column(db.Text)
     order=db.Column(db.Integer)
     is_active=db.Column(db.Boolean)
+    extra_img=db.relationship('TeamGallery', backref='team', lazy=True)
+    
+class TeamGallery(db.Model):
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    teamgallery_id=db.Column(db.Integer,db.ForeignKey('team.id'))
+    img=db.Column(db.String(80))
     
 class Testimonials(db.Model):
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
