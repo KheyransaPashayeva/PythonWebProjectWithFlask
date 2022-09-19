@@ -120,7 +120,7 @@
 
       <div class="col-lg-4 col-md-6 d-flex">
         <div class="member">
-          <img src="/static/uploads/{{team.employee_img}}" class="img-fluid" alt="" >
+          <img src="/static/uploads/{{team.employee_img}}" class="img-fluid" alt="" name='employee_img'>
           <div class="member-content">
             <h4>{{team.name}}</h4>
             <span>{{team.position}}</span>
@@ -154,7 +154,7 @@
              {% for testimonial in testimonials %}
                 <div class="swiper-slide">
                   <div class="testimonial-item">
-                    <img src="/static/uploads/{{testimonial.img}}" class="testimonial-img" alt="">
+                    <img src="/static/uploads/{{testimonial.img}}" class="testimonial-img"  alt="">
                     <h3>{{testimonial.name}}</h3>
                     <h4>{{testimonial.profession}}</h4>
                     <div class="stars">

@@ -60,21 +60,6 @@ def admin_service_delete(id):
     return redirect('/admin/service')
 
 
-# @admin_bp.route('/service/update/<int:id>',methods=['GET','POST'])
-# def admin_service_update(id):
-#     serviceForm=ServiceForm()
-#     from run import db
-#     from models import Services
-#     service=Services.query.get(id)
-#     if request.method=='POST':
-#         service_title=serviceForm.service_title.data
-#         service_img=serviceForm.service_img.data
-#         service_text=serviceForm.service_text.data
-#         db.session.add(service)
-#         db.session.commit()
-#         return redirect('/admin/service')
-#     return render_template('admin/service.html',service=service,serviceForm=serviceForm)
-
 
 # APp de Navbar hissenin dinamikliyi
 @admin_bp.route('/navbarlink',methods=['GET','POST'])
@@ -131,10 +116,14 @@ def admin_team_create():
         return redirect('/admin/team')
     return render_template('admin/team.html',teamForm=teamForm,teams=teams)
 
-@admin_bp.route('/team/delete/<int:id>',methods=['GET','POST'])
+@admin_bp.route('/team/delete/<int:id>',methods=['GET','POST']) 
 def admin_team_delete(id):
-    from run import db
+    from run import db,main
     from models import Team
+    team=db.session.execute(db.select(Team.employee_img).filter_by(id=id)).one() 
+    team=list(team)
+    team_img=team[0]
+    os.remove(os.path.join(main.config["UPLOAD_FOLDER"], team_img)) #team data basede delete eden zaman upload folderindende sekli filmek
     teams=Team.query.get(id)
     db.session.delete(teams)
     db.session.commit()
