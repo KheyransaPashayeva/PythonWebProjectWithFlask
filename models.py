@@ -21,9 +21,9 @@ class NavBar(db.Model):
 class Transport(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     transport_title = db.Column(db.String(180), unique=True, nullable=False)
-    transport_text = db.Column(db.String(220), nullable=False)
-    transport_img = db.Column(db.String(120), nullable=False)
-    transport_url = db.Column(db.String(120), nullable=False)
+    transport_text = db.Column(db.String(220))
+    transport_img = db.Column(db.String(120))
+    transport_url = db.Column(db.String(120))
     
 class AboutUs(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
@@ -75,4 +75,5 @@ class Users(db.Model):
     user_name = db.Column(db.String(80), unique=True, nullable=False)
     user_email = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
+    user_info =db.Column(db.Text)
     is_active = db.Column(db.Boolean)

@@ -1,0 +1,16 @@
+{% extends 'auth/base.html' %} 
+
+{% block content %}
+Register Page
+<div class="container">
+  <form action='{{url_for('auth.auth_register')}}' method='POST'>
+    {{registerForm.user_name(class_="form-control my-3 ",placeholder='Name')}}
+    {{registerForm.user_email(class_="form-control my-3 ",placeholder='Email')}}
+    {{registerForm.password(class_="form-control my-3 ",placeholder='Password')}}
+    {{registerForm.user_info(class_="form-control my-3 ",placeholder='Info')}}
+    {{registerForm.submit(class_="btn btn-primary ",value='Register')}}
+</form>
+
+</div>
+
+{% endblock %} 

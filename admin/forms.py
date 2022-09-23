@@ -32,7 +32,7 @@ class TeamForm(FlaskForm):
     submit=SubmitField('Add Employee')
 
 class TeamGalleryForm(FlaskForm):
-    
+    pass
 
 class TestimonialsForm(FlaskForm):
     name=StringField('Name')

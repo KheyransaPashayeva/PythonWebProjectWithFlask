@@ -93,10 +93,15 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
-                            <a class="profile-pic" href="#">
+                            <a class="profile-pic" href="{{url_for('admin.admin_profile')}}">
                                 <img src="./admin/static/plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                                    class="img-circle"><span class="text-white font-medium">Steave</span>
+                            </a>
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url_for('auth.auth_login')}}">
+                                    <span class="hide-menu font-medium">Logout</span>
+                                </a>
                         </li>
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->

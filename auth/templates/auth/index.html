@@ -1,0 +1,10 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+<div class="container">
+    <a  class="btn btn-primary" href="{{url_for('auth.auth_login')}}">Login</a>
+    <a  class="btn btn-primary" href="{{url_for('auth.auth_register')}}">Reister</a>
+</div>
+
+
+{% endblock  %}

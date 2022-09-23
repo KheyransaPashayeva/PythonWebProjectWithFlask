@@ -1,0 +1,14 @@
+{% extends 'auth/base.html' %} 
+
+{% block content %}
+Login Page
+<div class="container">
+
+  <form action='{{url_for('auth.auth_login')}}' method='POST'>
+    {{loginForm.user_email(class_="form-control my-3 ",placeholder='Email')}}
+    {{loginForm.password(class_="form-control my-3 ",placeholder='Password')}}
+    {{loginForm.submit(class_="btn btn-primary ",value='Login')}}
+</form>
+
+</div>
+{% endblock %} 

@@ -40,10 +40,9 @@ def admin_service_create():
     from models import Services
     services=Services.query.all()
     if request.method=='POST':
-        service_title=serviceForm.service_title.data
-        service_img=serviceForm.service_img.data
-        service_text=serviceForm.service_text.data
-        service=Services(service_title=service_title,service_img=service_img,service_text=service_text )
+        service=Services( service_title=serviceForm.service_title.data, service_img=serviceForm.service_img.data,
+                          service_text=serviceForm.service_text.data
+                        )
         db.session.add(service)
         db.session.commit()
         return redirect('/admin/service')
@@ -69,11 +68,9 @@ def admin_navbarlink_create():
     from models import NavBar
     navbarlinks=NavBar.query.all()
     if request.method=='POST':
-        navbar_name=navbarLinkForm.navbar_name.data
-        navbar_url=navbarLinkForm.navbar_url.data
-        navbar_order=navbarLinkForm.navbar_order.data
-        is_active=navbarLinkForm.is_active.data
-        navbar=NavBar(navbar_name=navbar_name,navbar_url=navbar_url,navbar_order=navbar_order,is_active=is_active)
+        navbar=NavBar( navbar_name=navbarLinkForm.navbar_name.data, navbar_url=navbarLinkForm.navbar_url.data,
+                       navbar_order=navbarLinkForm.navbar_order.data,is_active=navbarLinkForm.is_active.data
+                     )
         db.session.add(navbar)
         db.session.commit()
         return redirect('/admin/navbarlink')
@@ -107,13 +104,9 @@ def admin_team_create():
         extension=filename.rsplit('.',1)[1]
         new_filename=f"Employe{random.randint(1,1000)}.{extension}"
         file.save(os.path.join(team_folder,new_filename))
-        name=teamForm.name.data
-        employee_img=new_filename
-        position=teamForm.position.data
-        info=teamForm.info.data
-        order=teamForm.order.data
-        is_active=teamForm.is_active.data
-        team=Team(name=name,employee_img=employee_img,position=position,info=info,order=order,is_active=is_active)
+        team=Team( name=teamForm.name.data,employee_img=new_filename,position=teamForm.position.data,
+                   info=teamForm.info.data,order=teamForm.order.data,is_active=teamForm.is_active.data
+                 )
         db.session.add(team)
         db.session.commit()
         return redirect('/admin/team')
@@ -121,12 +114,8 @@ def admin_team_create():
 
 @admin_bp.route('/team/delete/<int:id>',methods=['GET','POST']) 
 def admin_team_delete(id):
-    from run import db,main
+    from run import db
     from models import Team
-    team=db.session.execute(db.select(Team.employee_img).filter_by(id=id)).one() 
-    team=list(team)
-    team_img=team[0]
-    os.remove(os.path.join(main.config["UPLOAD_FOLDER"], team_img)) #team data basede delete eden zaman upload folderindende sekli filmek
     teams=Team.query.get(id)
     db.session.delete(teams)
     db.session.commit()
@@ -152,13 +141,10 @@ def admin_testimonials():
                 file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
                 poto_size = os.stat(main.config["UPLOAD_FOLDER"]).st_size
                 print(poto_size)
-                name=testimonialsForm.name.data
-                info=testimonialsForm.info.data
-                img=new_filename
-                profession=testimonialsForm.profession.data
-                order=testimonialsForm.order.data
-                isActive=testimonialsForm.isActive.data
-                testimonial=Testimonials(name=name,info=info,img=img,order=order,isActive=isActive,profession=profession)
+                testimonial=Testimonials( name=testimonialsForm.name.data,info=testimonialsForm.info.data,
+                                          img=new_filename, order=testimonialsForm.order.data,isActive=testimonialsForm.isActive.data,
+                                          profession=testimonialsForm.profession.data
+                                        )
                 db.session.add(testimonial)
                 db.session.commit()
             return redirect('/admin/testimonials')
@@ -186,11 +172,11 @@ def admin_transport_create():
     from models import Transport
     transports=Transport.query.all()
     if request.method=='POST':
-        transport_title=transportForm.transport_title.data
-        transport_img=transportForm.transport_img.data
-        transport_text=transportForm.transport_text.data
-        transport_url=transportForm.transport_url.data
-        transport=Transport(transport_title=transport_title,transport_img=transport_img,transport_text=transport_text,transport_url=transport_url )
+        transport=Transport( transport_title=transportForm.transport_title.data,
+                             transport_img=transportForm.transport_img.data,
+                             transport_text=transportForm.transport_text.data,
+                             transport_url=transportForm.transport_url.data
+                            )
         db.session.add(transport)
         db.session.commit()
         return redirect('/admin/transport')
