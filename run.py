@@ -26,7 +26,7 @@ from app.routes import *
 from admin.routes import *
 from auth.routes import *
 from models import *
-db.create_all()
+# db.create_all()
 
 
 if __name__ == '__main__':

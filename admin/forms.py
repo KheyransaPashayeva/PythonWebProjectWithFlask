@@ -51,3 +51,17 @@ class TransportForm(FlaskForm):
     transport_url=StringField('TransportUrl')
     submit=SubmitField('Add transport')
     
+class FeatureForm(FlaskForm):
+    feature_title=StringField('FeatureTitle')
+    feature_img=FileField('FeatureIMG')
+    feature_text=TextAreaField('FeatureText')
+    feature_orderimg=StringField('Feature orderimg')
+    feature_ordertext=StringField('Feature ordertext')
+    is_active=BooleanField('Is Active')
+    submit=SubmitField('Add feature')
+    
+    
+class FaqsForm(FlaskForm):
+    faq_question=StringField('FaqQuestion')
+    faq_answer=StringField('FaqQuestion')
+    submit=SubmitField('Add faq')

@@ -1,0 +1,50 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add faq</h5>
+    <p class="card-text"> 
+      <form action='/admin/faq' method='POST'>
+              {{faqsForm.faq_question(class_="form-control my-3 ",placeholder='faq question')}}
+              {{faqsForm.faq_answer(class_="form-control my-3 ",placeholder='faq answer')}}
+              {{faqsForm.submit(class_="btn btn-primary ",valies='Add faq')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">faq list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">faqQuestion</th>
+            <th scope="col">faqAnswer</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for faq in faqs %}
+          <tr>
+            <td>{{faq.id}}</td>
+            <td>{{faq.faq_question}}</td>
+            <td>{{faq.faq_answer}}</td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/faq/delete/{{faq.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/faq/update/{{faq.id}}'>Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

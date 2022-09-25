@@ -77,3 +77,17 @@ class Users(db.Model):
     password = db.Column(db.String(120), nullable=False)
     user_info =db.Column(db.Text)
     is_active = db.Column(db.Boolean)
+    
+class Feature(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    feature_title = db.Column(db.String(180))
+    feature_img = db.Column(db.String(120))
+    feature_text =db.Column(db.Text)
+    feature_orderimg=db.Column(db.String(80))
+    feature_ordertext=db.Column(db.String(80))
+    is_active = db.Column(db.Boolean)
+    
+class Faqs(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    faq_question = db.Column(db.String(220))
+    faq_answer = db.Column(db.String(220))

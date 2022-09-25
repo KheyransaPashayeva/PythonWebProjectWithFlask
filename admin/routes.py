@@ -1,6 +1,6 @@
 from flask import Flask,redirect,url_for,render_template,request
 from admin import admin_bp
-from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm
+from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm,FeatureForm
 import os
 from werkzeug.utils import secure_filename
 import random
@@ -181,3 +181,52 @@ def admin_transport_create():
         db.session.commit()
         return redirect('/admin/transport')
     return render_template('admin/transport.html',transportForm=transportForm,transports=transports)
+
+
+# admin de transport elementlerini delete etmek
+@admin_bp.route('/transport/delete/<int:id>',methods=['GET','POST'])
+def admin_transport_delete(id):
+    from run import db
+    from models import Transport
+    transport=Transport.query.get(id)
+    db.session.delete(transport)
+    db.session.commit()
+    return redirect('/admin/transport')
+
+
+# app indexinde olan feature bolmesine yenisini elave etmek
+@admin_bp.route('/feature',methods=['GET','POST'])
+def admin_feature_create():
+   from run import db,main
+   from models import Feature
+   features=Feature.query.all()
+   featureForm=FeatureForm()
+   if request.method=="POST":
+        file=request.files['feature_img']
+        filename=secure_filename(file.filename)
+        extension=filename.rsplit('.',1)[1]
+        new_filename=f"Feature{random.randint(1,1000)}.{extension}"
+        file.save(os.path.join(main.config["UPLOAD_FOLDER"],new_filename))
+        feature=Feature( feature_title=featureForm.feature_title.data,feature_img=new_filename,
+                         feature_text=featureForm.feature_text.data,feature_orderimg=featureForm.feature_orderimg.data,
+                         feature_ordertext=featureForm.feature_ordertext.data,is_active=featureForm.is_active.data
+                        )
+        db.session.add(feature)
+        db.session.commit()
+        return redirect('/admin/feature')
+   return render_template('admin/feature.html',featureForm=featureForm,features=features)
+
+
+
+@admin_bp.route('/feature/delete/<int:id>',methods=['GET','POST'])
+def admin_feature_delete(id):
+    from run import db,main
+    from models import Feature
+    feature=db.session.execute(db.select(Feature.feature_img).filter_by(id=id)).one() 
+    feature=list(feature)
+    new_feature_img=feature[0]
+    os.remove(os.path.join(main.config["UPLOAD_FOLDER"], new_feature_img))
+    features=Feature.query.get(id)
+    db.session.delete(features)
+    db.session.commit()
+    return redirect('/admin/feature')

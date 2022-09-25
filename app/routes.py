@@ -4,12 +4,13 @@ from app import app_bp
 @app_bp.route('/')
 def app_index():
     from run import db
-    from models import NavBar,Services,Testimonials,Transport
+    from models import NavBar,Services,Testimonials,Transport,Feature
     navbarlink=NavBar.query.all()
     services=Services.query.all()
     testimonials=Testimonials.query.all()
     transports=Transport.query.all()
-    return render_template('app/index.html',navbarlink=navbarlink,services=services,testimonials=testimonials,transports=transports)
+    features=Feature.query.all()
+    return render_template('app/index.html',navbarlink=navbarlink,services=services,testimonials=testimonials,transports=transports,features=features)
 
 @app_bp.route('/contact')
 def app_contact():
@@ -30,10 +31,13 @@ def app_about():
 @app_bp.route('/service')
 def app_service():
     from run import db
-    from models import NavBar,Services
+    from models import NavBar,Services,Testimonials,Feature,Transport
     navbarlink=NavBar.query.all()
     services=Services.query.all()
-    return render_template('app/services.html',navbarlink=navbarlink,services=services)
+    features=Feature.query.all()
+    testimonials=Testimonials.query.all()
+    transports=Transport.query.all()
+    return render_template('app/services.html',navbarlink=navbarlink,services=services,features=features,testimonials=testimonials,transports=transports)
 
 @app_bp.route('/service-detail/<int:id>', methods=['GET','POST'])
 def app_service_detail(id):

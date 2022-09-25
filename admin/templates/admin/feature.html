@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add Feature</h5>
+    <p class="card-text"> 
+        <form action='/admin/feature' method='POST' enctype="multipart/form-data">
+            {{featureForm.feature_title(class_="form-control my-3 ",placeholder='feature title ')}}
+            {{featureForm.feature_img(class_="form-control my-3 ",placeholder='feature image')}}
+            {{featureForm.feature_text(class_="form-control my-3 ",placeholder='feature text ')}}
+            {{featureForm.feature_orderimg(class_="form-control my-3 ",placeholder='feature orderimg ')}}
+            {{featureForm.feature_ordertext(class_="form-control my-3 ",placeholder='feature ordertext ')}} 
+            <div class="input-group mb-3">
+              <label class="form-check-label" for-"flexCheckDefault">
+                {{featureForm.is_active(class_="form-check-input mt-0",type="checkbox")}}
+                Is Active?
+              </lable>
+            </div>
+            {{featureForm.submit(class_="btn btn-primary ",value='Add feature')}}
+    </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Feature list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FeatureTitle</th>
+            <th scope="col">FeatureImage</th>
+            <th scope="col">Action</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for feature in features %}
+          <tr>
+            <td>{{feature.id}}</td>
+            <td>{{feature.feature_title}}</td>
+            <td>
+                <img src='/static/uploads/{{feature.feature_img}}' class='img-thumbnail' style='width:70px; heigth:70px; object-fit:cover'>
+             
+            </td>
+            <td>
+                <a class="btn btn-danger"  href='/admin/feature/delete/{{feature.id}}'>Delete </a>
+                <a class="btn btn-primary"  href='/admin/feature/update/{{feature.id}}'>Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}
