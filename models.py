@@ -76,7 +76,7 @@ class Users(db.Model):
     user_email = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     user_info =db.Column(db.Text)
-    is_active = db.Column(db.Boolean)
+   
     
 class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)

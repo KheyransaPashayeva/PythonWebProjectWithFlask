@@ -1,6 +1,8 @@
 from flask import Flask,redirect,url_for,render_template,request,flash
 from auth import auth_bp
 from auth.forms import LoginForm,RegisterForm
+import re
+
 @auth_bp.route('/')
 def auth_index():
     return render_template('auth/index.html')
@@ -24,10 +26,13 @@ def auth_register():
     from run import db
     registerForm=RegisterForm()
     if request.method=='POST':
-        user=Users( user_name=registerForm.user_name.data,user_email=registerForm.user_email.data,password=registerForm.password.data,
+        password=registerForm.password.data
+        if(re.search(r'[A-Z][a-z]', password) and len(password) >5 and len(password)< 10):
+            
+            user=Users( user_name=registerForm.user_name.data,user_email=registerForm.user_email.data,password=password,
                     user_info=registerForm.user_info.data
                   )
-        db.session.add(user)
+            db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.auth_login'))
     return render_template('auth/register.html',registerForm=registerForm)
