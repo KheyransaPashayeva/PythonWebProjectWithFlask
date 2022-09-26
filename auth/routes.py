@@ -29,9 +29,9 @@ def auth_register():
         password=registerForm.password.data
         if(re.search(r'[A-Z][a-z]', password) and len(password) >5 and len(password)< 10):
             
-            user=Users( user_name=registerForm.user_name.data,user_email=registerForm.user_email.data,password=password,
-                    user_info=registerForm.user_info.data
-                  )
+            user=Users( user_name=registerForm.user_name.data,user_email=registerForm.user_email.data,
+                        password=password,user_info=registerForm.user_info.data
+                      )
             db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.auth_login'))

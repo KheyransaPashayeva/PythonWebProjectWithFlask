@@ -1,6 +1,6 @@
 from flask import Flask,redirect,url_for,render_template,request
 from admin import admin_bp
-from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm,FeatureForm
+from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm,FeatureForm,FaqsForm
 import os
 from werkzeug.utils import secure_filename
 import random
@@ -230,3 +230,28 @@ def admin_feature_delete(id):
     db.session.delete(features)
     db.session.commit()
     return redirect('/admin/feature')
+
+
+# app indexinde olan faq bolmesine yenisini elave etmek
+@admin_bp.route('/faq',methods=['GET','POST'])
+def admin_faq_create():
+    faqsForm=FaqsForm()
+    from run import db
+    from models import Faqs
+    faqs=Faqs.query.all()
+    if request.method=='POST':
+        faq=Faqs( faq_question=faqsForm.faq_question.data,faq_answer=faqsForm.faq_answer.data)
+        db.session.add(faq)
+        db.session.commit()
+        return redirect('/admin/faq')
+    return render_template('admin/faq.html',faqsForm=faqsForm,faqs=faqs)
+
+# admin de faq elementlerini delete etmek
+@admin_bp.route('/faq/delete/<int:id>',methods=['GET','POST'])
+def admin_faq_delete(id):
+    from run import db
+    from models import Faqs
+    faq=Faqs.query.get(id)
+    db.session.delete(faq)
+    db.session.commit()
+    return redirect('/admin/faq')
