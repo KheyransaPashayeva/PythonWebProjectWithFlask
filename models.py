@@ -30,7 +30,12 @@ class AboutUs(db.Model):
     about_title = db.Column(db.String(180), unique=True, nullable=False)
     about_text = db.Column(db.String(220))
     about_video = db.Column(db.String(120))
-
+    
+class Stats(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name=db.Column(db.String(220))
+    value=db.Column(db.Integer)
+    
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(180), nullable=False)

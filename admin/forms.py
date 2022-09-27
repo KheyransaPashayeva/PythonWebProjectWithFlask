@@ -65,3 +65,8 @@ class FaqsForm(FlaskForm):
     faq_question=StringField('FaqQuestion')
     faq_answer=StringField('FaqQuestion')
     submit=SubmitField('Add faq')
+    
+class StatsForm(FlaskForm):
+    name=StringField('name')
+    value=IntegerField('value')
+    submit=SubmitField('Add stat')

@@ -1,9 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request
-from admin import admin_bp
-from admin.forms import MessagesForm,ServiceForm,NavbarLinkForm,TeamForm,TestimonialsForm,TransportForm,FeatureForm,FaqsForm
-import os
-from werkzeug.utils import secure_filename
-import random
+from admin.imports import *
 
 
 @admin_bp.route('/')
@@ -255,3 +250,26 @@ def admin_faq_delete(id):
     db.session.delete(faq)
     db.session.commit()
     return redirect('/admin/faq')
+
+# app indexinde olan Stat bolmesine yenisini elave etmek
+@admin_bp.route('/stat',methods=['GET','POST'])
+def admin_stat_create():
+    statsForm=StatsForm()
+    from run import db
+    from models import Stats
+    stats=Stats.query.all()
+    if request.method=='POST':
+        stat=Stats( name=statsForm.name.data,value=statsForm.value.data)
+        db.session.add(stat)
+        db.session.commit()
+        return redirect('/admin/stat')
+    return render_template('admin/stat.html',statsForm=statsForm,stats=stats)
+
+@admin_bp.route('/stat/delete/<int:id>',methods=['GET','POST'])
+def admin_stat_delete(id):
+    from run import db
+    from models import Stats
+    stat=Stats.query.get(id)
+    db.session.delete(stat)
+    db.session.commit()
+    return redirect('/admin/stat')

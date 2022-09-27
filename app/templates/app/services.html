@@ -33,7 +33,7 @@
             <div>
               <h4 class="title">{{transport.transport_title}}</h4>
               <p class="description">{{transport.transport_text}}</p>
-              <a href="{{transport.transport_url}}" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{transport.transport_url}}/{{transport.id}}" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
           <!-- End Service Item -->
@@ -61,7 +61,7 @@
               <div class="card-img">
                 <img src="{{service.service_img}}" alt="" class="img-fluid">
               </div>
-              <h3><a href="service-details.html" class="stretched-link">{{service.service_title}}</a></h3>
+              <h3><a href="/service-detail/{{service.id}}" class="stretched-link">{{service.service_title}}</a></h3>
               <p>{{service.service_text}}</p>
             </div>
           </div><!-- End Card Item -->

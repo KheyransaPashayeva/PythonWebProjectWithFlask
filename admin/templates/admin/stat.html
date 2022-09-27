@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add stat</h5>
+    <p class="card-text"> 
+      <form action='/admin/stat' method='POST'>
+              {{statsForm.name(class_="form-control my-3 ",placeholder=' name')}}
+              {{statsForm.value(class_="form-control my-3 ",placeholder='value')}}
+              {{statsForm.submit(class_="btn btn-primary ",valies='Add stat')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">stat list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for stat in stats %}
+          <tr>
+            <td>{{stat.id}}</td>
+            <td>{{stat.name}}</td>
+            <td>{{stat.value}}</td>
+    
+            <td>
+                <a class="btn btn-primary"  href='/admin/stat/update/{{stat.id}}'>Update </a>
+                <a class="btn btn-danger"  href='/admin/stat/delete/{{stat.id}}'>Delete </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}
