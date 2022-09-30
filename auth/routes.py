@@ -2,7 +2,7 @@ from flask import Flask,redirect,url_for,render_template,request,flash
 from auth import auth_bp
 from auth.forms import LoginForm,RegisterForm
 import re
-
+from flask_login import logout_user,login_user,login_required,current_user
 @auth_bp.route('/')
 def auth_index():
     return render_template('auth/index.html')
@@ -13,9 +13,15 @@ def auth_login():
     from models import Users
     from run import db
     if request.method=='POST':
-        for user in Users.query.all():
-            if user.user_email==loginForm.user_email.data and user.password==loginForm.password.data:  
-                return redirect(url_for('admin.admin_index'))
+        user=Users.query.filter_by(user_email=loginForm.user_email.data).first()
+        if user:
+            if user.password==loginForm.password.data:
+               login_user(user)
+               return redirect(url_for('admin.admin_index'))
+            else:
+               flash("Password is wrong")
+        else:
+            flash("User not found")    
          
     return render_template('auth/login.html',loginForm=loginForm)
 
@@ -39,5 +45,6 @@ def auth_register():
 
 @auth_bp.route('/logout',methods=['GET','POST'])
 def auth_logout():
+    logout_user()
     return redirect(url_for('auth.auth_login'))
     

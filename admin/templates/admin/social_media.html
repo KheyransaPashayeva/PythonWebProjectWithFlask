@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add Social Media</h5>
+    <p class="card-text"> 
+      <form action='/admin/social_media' method='POST'>
+              {{socialmediaForm.social_name(class_="form-control my-3 ",placeholder='social name')}}
+              {{socialmediaForm.social_icon(class_="form-control my-3 ",placeholder='social icon')}}
+              {{socialmediaForm.social_url(class_="form-control my-3 ",placeholder='social url')}}
+              {{socialmediaForm.submit(class_="btn btn-primary ",valies='Add social')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">socialmedia list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">socialmedia name</th>
+            <th scope="col">socialmedia icon</th>
+            <th scope="col">socialmedia url</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for socialmedia in socialmedias %}
+          <tr>
+            <td>{{socialmedia.id}}</td>
+            <td>{{socialmedia.social_name}}</td>
+            <td>{{socialmedia.social_icon}}</td>
+            <td>{{socialmedia.social_url}}</td>
+            <td>
+                <a class=" far fa-trash-alt" style="color:red; margin:10px"   href='/admin/social_media/delete/{{socialmedia.id}}'> Delete </a>
+                <a class=" far fa-edit"   href='/admin/social_media/update/{{socialmedia.id}}'> Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

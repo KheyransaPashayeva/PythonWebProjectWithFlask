@@ -9,12 +9,9 @@
 
           <div class="col-lg-4">
             <div class="services-list">
-              <a href="#" class="active">{{services.service_title}}</a>
-              <a href="#">Logistics</a>
-              <a href="#">Cargo</a>
-              <a href="#">Trucking</a>
-              <a href="#">Packaging</a>
-              <a href="#">Warehousing</a>
+              {% for service in service %}
+              <a href="/service-detail/{{service.id}}" class="active">{{service.service_title}}</a>
+              {% endfor %}
             </div>
 
             <h4>Enim qui eos rerum in delectus</h4>

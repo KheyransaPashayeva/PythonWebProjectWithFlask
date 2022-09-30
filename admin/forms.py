@@ -1,14 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,EmailField,DateField,PasswordField,SubmitField,TextAreaField,IntegerField,BooleanField,FileField
 
-class MessagesForm(FlaskForm):
-    name=StringField('Name')
-    email=EmailField('Email')
-    subject=StringField('Subject')
-    message=TextAreaField('Message')
-    message_date=DateField('message_date')
-    submit=SubmitField('Add message')
-
 class ServiceForm(FlaskForm):
     service_title=StringField('ServiceTitle')
     service_img=StringField('ServiceIMG')
@@ -70,3 +62,15 @@ class StatsForm(FlaskForm):
     name=StringField('name')
     value=IntegerField('value')
     submit=SubmitField('Add stat')
+
+class SocialMediaForm(FlaskForm):
+    social_name=StringField('Social name')
+    social_icon=StringField('Social icon')
+    social_url=StringField('Social url')
+    submit=SubmitField('Add socialmedia')
+    
+class TeamSocialForm(FlaskForm):
+    social_name=StringField('Social name')
+    social_icon=StringField('Social icon')
+    social_url=StringField('Social url')
+    submit=SubmitField('Add socialmedia')

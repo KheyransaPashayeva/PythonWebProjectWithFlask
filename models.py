@@ -1,5 +1,6 @@
 from run import main,db
 import datetime
+from flask_login import UserMixin
 
 #contactdan geden msjlar
 class Messages(db.Model):
@@ -8,7 +9,7 @@ class Messages(db.Model):
     email = db.Column(db.String(120), nullable=False)
     subject = db.Column(db.String(120))
     message = db.Column(db.Text(220))
-    message_date = db.Column(db.String(120))
+    message_date = db.Column(db.DateTime)
     
 #saytin Navbar hissesi
 class NavBar(db.Model):
@@ -25,11 +26,7 @@ class Transport(db.Model):
     transport_img = db.Column(db.String(120))
     transport_url = db.Column(db.String(120))
     
-class AboutUs(db.Model):
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    about_title = db.Column(db.String(180), unique=True, nullable=False)
-    about_text = db.Column(db.String(220))
-    about_video = db.Column(db.String(120))
+
     
 class Stats(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
@@ -61,12 +58,6 @@ class Testimonials(db.Model):
     isActive=db.Column(db.Boolean)
 
     
-class AboutIcon(db.Model):
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    about_icon_title = db.Column(db.String(180), unique=True, nullable=False)
-    about_icon_text = db.Column(db.String(220))
-    about_icon_img = db.Column(db.String(120))
-    
     
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
@@ -75,7 +66,8 @@ class Services(db.Model):
     service_img = db.Column(db.String(120))
     
     
-class Users(db.Model):
+    
+class Users(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     user_name = db.Column(db.String(80), unique=True, nullable=False)
     user_email = db.Column(db.String(120),unique=True, nullable=False)
@@ -96,3 +88,15 @@ class Faqs(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     faq_question = db.Column(db.String(220))
     faq_answer = db.Column(db.String(220))
+    
+class SocialMedia(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    social_name = db.Column(db.String(180))
+    social_icon = db.Column(db.String(120))
+    social_url = db.Column(db.String(120))
+    
+class TeamSocial(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    social_name = db.Column(db.String(180))
+    social_icon = db.Column(db.String(120))
+    social_url = db.Column(db.String(120))

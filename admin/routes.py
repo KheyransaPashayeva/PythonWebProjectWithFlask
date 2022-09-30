@@ -2,33 +2,27 @@ from admin.imports import *
 
 
 @admin_bp.route('/')
+@login_required
 def admin_index():
     return render_template('admin/index.html')
 
 @admin_bp.route('/profile')
+@login_required
 def admin_profile():
     return render_template('admin/profile.html')
 
-@admin_bp.route('/message/create',methods=['GET','POST'])
-def admin_message_create():
-    messageForm=MessagesForm()
+@admin_bp.route('/message',methods=['GET','POST'])
+@login_required
+def admin_message():
     from run import db
     from models import Messages
-    if request.method=='POST':
-        message=Messages(
-            name=messagesForm.name.data,
-            email=messageForm.email.data,
-            subject=messageForm.subject.data,
-            message=messageForm.message.data,
-            message_date=messageForm.message_date.data
-        )
-        db.session.add(message)
-        db.session.commit()
-        return redirect('/message/create')
-    return render_template('admin/message_create.html',messageForm=messageForm)
+    messages=Messages.query.all()
+   
+    return render_template('admin/contact_message.html',messages=messages)
 
 # app indexinde olan service bolmesine yenisini elave etmek
 @admin_bp.route('/service',methods=['GET','POST'])
+@login_required
 def admin_service_create():
     serviceForm=ServiceForm()
     from run import db
@@ -42,6 +36,16 @@ def admin_service_create():
         db.session.commit()
         return redirect('/admin/service')
     return render_template('admin/service.html',serviceForm=serviceForm,services=services)
+
+# admin de message elementlerini edit etmek
+@admin_bp.route('/message/delete/<int:id>',methods=['GET','POST'])
+def admin_message_delete(id):
+    from run import db
+    from models import Messages
+    message=Messages.query.get(id)
+    db.session.delete(message)
+    db.session.commit()
+    return redirect('/admin/message')
 
 # admin de service elementlerini edit etmek
 @admin_bp.route('/service/delete/<int:id>',methods=['GET','POST'])
@@ -57,6 +61,7 @@ def admin_service_delete(id):
 
 # APp de Navbar hissenin dinamikliyi
 @admin_bp.route('/navbarlink',methods=['GET','POST'])
+@login_required
 def admin_navbarlink_create():
     navbarLinkForm=NavbarLinkForm()
     from run import db
@@ -85,6 +90,7 @@ def admin_navbarlink_delete(id):
 
 # Team route start
 @admin_bp.route('/team',methods=['GET','POST'])
+@login_required
 def admin_team_create():
     teamForm=TeamForm()
     from run import db,main
@@ -120,6 +126,7 @@ def admin_team_delete(id):
 
 
 @admin_bp.route('/testimonials',methods=['GET','POST'])
+@login_required
 def admin_testimonials():
     from run import db,main
     from models import Testimonials
@@ -161,6 +168,7 @@ def admin_testimonial_delete(id):
 
 # app indexinde olan transport bolmesine yenisini elave etmek
 @admin_bp.route('/transport',methods=['GET','POST'])
+@login_required
 def admin_transport_create():
     transportForm=TransportForm()
     from run import db
@@ -191,6 +199,7 @@ def admin_transport_delete(id):
 
 # app indexinde olan feature bolmesine yenisini elave etmek
 @admin_bp.route('/feature',methods=['GET','POST'])
+@login_required
 def admin_feature_create():
    from run import db,main
    from models import Feature
@@ -229,6 +238,7 @@ def admin_feature_delete(id):
 
 # app indexinde olan faq bolmesine yenisini elave etmek
 @admin_bp.route('/faq',methods=['GET','POST'])
+@login_required
 def admin_faq_create():
     faqsForm=FaqsForm()
     from run import db
@@ -253,6 +263,7 @@ def admin_faq_delete(id):
 
 # app indexinde olan Stat bolmesine yenisini elave etmek
 @admin_bp.route('/stat',methods=['GET','POST'])
+@login_required
 def admin_stat_create():
     statsForm=StatsForm()
     from run import db
@@ -273,3 +284,55 @@ def admin_stat_delete(id):
     db.session.delete(stat)
     db.session.commit()
     return redirect('/admin/stat')
+
+# app indexinde olan social_media bolmesine yenisini elave etmek
+@admin_bp.route('/social_media',methods=['GET','POST'])
+@login_required
+def admin_social_media_create():
+    socialmedia=SocialMediaForm()
+    from run import db
+    from models import SocialMedia
+    socialmedias=SocialMedia.query.all()
+    if request.method=='POST':
+        socialmedia=SocialMedia( social_name=socialmediaForm.social_name.data,social_icon=socialmediaForm.social_icon.data,
+                                social_url=socialmediaForm.social_url.data
+                                )
+        db.session.add(socialmedia)
+        db.session.commit()
+        return redirect('/admin/social_media')
+    return render_template('admin/social_media.html',socialmediaForm=socialmediaForm,socialmedias=socialmedias)
+
+@admin_bp.route('/social_media/delete/<int:id>',methods=['GET','POST'])
+def admin_social_media_delete(id):
+    from run import db
+    from models import SocialMedia
+    socialmedia=SocialMedia.query.get(id)
+    db.session.delete(socialmedia)
+    db.session.commit()
+    return redirect('/admin/social_media')
+
+# app indexinde olan team social_media bolmesine yenisini elave etmek
+@admin_bp.route('/team_social',methods=['GET','POST'])
+@login_required
+def admin_team_social_create():
+    teamsocialForm=TeamSocialForm()
+    from run import db
+    from models import TeamSocial
+    teamsocials=TeamSocial.query.all()
+    if request.method=='POST':
+        teamsocial=TeamSocial( social_name=teamsocialForm.social_name.data,social_icon=teamsocialForm.social_icon.data,
+                                social_url=teamsocialForm.social_url.data
+                                )
+        db.session.add(teamsocial)
+        db.session.commit()
+        return redirect('/admin/team_social')
+    return render_template('admin/team_social.html',teamsocialForm=teamsocialForm,teamsocials=teamsocials)
+
+@admin_bp.route('/team_social/delete/<int:id>',methods=['GET','POST'])
+def admin_team_social_delete(id):
+    from run import db
+    from models import TeamSocial
+    teamsocials=TeamSocial.query.get(id)
+    db.session.delete(teamsocials)
+    db.session.commit()
+    return redirect('/admin/team_social')

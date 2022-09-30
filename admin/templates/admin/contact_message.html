@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Message list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col"> Name</th>
+            <th scope="col">Email</th>           
+            <th scope="col"> Subject</th>
+            <th scope="col">Message</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for message in messages %}
+          <tr>
+            <td>{{message.id}}</td>
+            <td>{{message.name}}</td>
+            <td>{{message.email}}</td>
+            <td>{{message.subject}} </td>
+            <td>{{message.message}}</td>
+            <td>
+                <a class=" far fa-trash-alt" style="color:red; margin:10px" href='/admin/message/delete/{{message.id}}'> Delete </a>
+                <a class=" far fa-edit"  href='/admin/message/update/{{message.id}}'> Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}
