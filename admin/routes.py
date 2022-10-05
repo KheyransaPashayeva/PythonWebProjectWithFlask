@@ -289,7 +289,7 @@ def admin_stat_delete(id):
 @admin_bp.route('/social_media',methods=['GET','POST'])
 @login_required
 def admin_social_media_create():
-    socialmedia=SocialMediaForm()
+    socialmediaForm=SocialMediaForm()
     from run import db
     from models import SocialMedia
     socialmedias=SocialMedia.query.all()

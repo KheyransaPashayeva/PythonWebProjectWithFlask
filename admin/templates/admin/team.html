@@ -7,6 +7,7 @@
     <h5 class="card-title">Add new Team</h5>
     <p class="card-text"> 
       <form action='/admin/team' method='POST' enctype="multipart/form-data">
+              {{ ckeditor.load() }}
               {{teamForm.name(class_="form-control my-3 ",placeholder='Team Name ')}}
               {{teamForm.employee_img(class_="form-control my-3 ",placeholder='Team image')}}
               {{teamForm.position(class_="form-control my-3 ",placeholder='Team position ')}}

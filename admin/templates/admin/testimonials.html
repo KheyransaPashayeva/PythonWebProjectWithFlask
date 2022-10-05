@@ -7,6 +7,7 @@
     <h5 class="card-title">Add new Team</h5>
     <p class="card-text"> 
       <form action='/admin/testimonials' method='POST' enctype="multipart/form-data">
+              {{ ckeditor.load() }}
               {{testimonialsForm.name(class_="form-control my-3 ",placeholder='Testimonials Name ')}}
               {{testimonialsForm.img(class_="form-control my-3 ",placeholder='Testimonials image')}}
               {{testimonialsForm.profession(class_="form-control my-3 ",placeholder='Testimonials profession ')}}
