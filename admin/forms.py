@@ -75,3 +75,9 @@ class TeamSocialForm(FlaskForm):
     social_icon=StringField('Social icon')
     social_url=StringField('Social url')
     submit=SubmitField('Add socialmedia')
+    
+class PricingForm(FlaskForm):
+    pricing_name =StringField('Pricing name')
+    price =IntegerField('price')
+    incridents =TextAreaField('FeatureText')
+    submit=SubmitField('Add pricing')

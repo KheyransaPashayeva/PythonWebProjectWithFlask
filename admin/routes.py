@@ -336,3 +336,30 @@ def admin_team_social_delete(id):
     db.session.delete(teamsocials)
     db.session.commit()
     return redirect('/admin/team_social')
+
+
+
+# app indexinde olan pricing bolmesine yenisini elave etmek
+@admin_bp.route('/pricing',methods=['GET','POST'])
+@login_required
+def admin_pricing_create():
+    pricingForm=PricingForm()
+    from run import db
+    from models import Pricing
+    pricings=Pricing.query.all()
+    if request.method=='POST':
+        pricing=Pricing( pricing_name=pricingForm.pricing_name.data,price=pricingForm.price.data,incridents=pricingForm.incridents.data)
+        db.session.add(pricing)
+        db.session.commit()
+        return redirect('/admin/pricing')
+    return render_template('admin/pricing.html',pricingForm=pricingForm,pricings=pricings)
+
+
+@admin_bp.route('/pricing/delete/<int:id>',methods=['GET','POST'])
+def admin_pricing_delete(id):
+    from run import db
+    from models import Pricing
+    pricings=Pricing.query.get(id)
+    db.session.delete(pricings)
+    db.session.commit()
+    return redirect('/admin/pricing')

@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %} 
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add pricing</h5>
+    <p class="card-text"> 
+      <form action='/admin/pricing' method='POST'>
+              {{pricingForm.pricing_name(class_="form-control my-3 ",placeholder='pricing name')}}
+              {{pricingForm.price(class_="form-control my-3 ",placeholder='pricing price')}}
+              {{pricingForm.incridents(class_="form-control my-3 ",placeholder='pricing incridents')}}
+              {{pricingForm.submit(class_="btn btn-primary ",valies='Add pricing')}}
+      </form>
+    </p>
+    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">pricing list</h5>
+    <p class="card-text"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">PricingName</th>
+            <th scope="col">PricingPrice</th>
+            <th scope="col">PricingIncridents</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+        {% for pricing in pricings %}
+          <tr>
+            <td>{{pricing.id}}</td>
+            <td>{{pricing.pricing_name}}</td>
+            <td>{{pricing.price}}</td>
+            <td>{{pricing.incridents}}</td>
+            <td>
+                <a class=" far fa-trash-alt" style="color:red; margin:10px"   href='/admin/pricing/delete/{{pricing.id}}'> Delete </a>
+                <a class=" far fa-edit"   href='/admin/pricing/update/{{pricing.id}}'> Update </a>
+            <td>
+          </tr>
+        
+          {% endfor %}
+        </tbody>
+      </table>
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

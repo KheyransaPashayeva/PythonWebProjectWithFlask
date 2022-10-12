@@ -100,3 +100,9 @@ class TeamSocial(db.Model):
     social_name = db.Column(db.String(180))
     social_icon = db.Column(db.String(120))
     social_url = db.Column(db.String(120))
+    
+class Pricing(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    pricing_name = db.Column(db.String(180))
+    price = db.Column(db.Integer)
+    incridents = db.Column(db.Text)

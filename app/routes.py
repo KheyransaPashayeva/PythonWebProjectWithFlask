@@ -5,7 +5,7 @@ from app.forms import MessagesForm
 @app_bp.route('/')
 def app_index():
     from run import db
-    from models import NavBar,Services,Testimonials,Transport,Feature,Faqs,Stats,SocialMedia
+    from models import NavBar,Services,Testimonials,Transport,Feature,Faqs,Stats,SocialMedia,Pricing
     services=Services.query.all()
     context={
         "navbarlink":NavBar.query.all(),
@@ -15,7 +15,8 @@ def app_index():
         "testimonials":Testimonials.query.all(),
         "stats":Stats.query.all(),
         "faqs":Faqs.query.all(),
-        "socialmedias":SocialMedia.query.all()
+        "socialmedias":SocialMedia.query.all(),
+        "pricings":Pricing.query.all()
     }
     return render_template('app/index.html',**context)
 

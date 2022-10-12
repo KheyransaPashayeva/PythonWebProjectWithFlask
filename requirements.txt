@@ -2,6 +2,7 @@ alembic
 click
 colorama
 Flask
+Flask-CKEditor
 Flask-Login
 Flask-Migrate
 Flask-SQLAlchemy
@@ -11,5 +12,6 @@ itsdangerous
 Jinja2
 Mako
 MarkupSafe
+SQLAlchemy
 Werkzeug
 WTForms
