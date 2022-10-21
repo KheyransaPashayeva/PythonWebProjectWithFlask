@@ -73,7 +73,7 @@ class Users(UserMixin,db.Model):
     user_email = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     user_info =db.Column(db.Text)
-   
+    is_authorized=db.Column(db.Boolean)
     
 class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
@@ -105,4 +105,9 @@ class Pricing(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     pricing_name = db.Column(db.String(180))
     price = db.Column(db.Integer)
-    incridents = db.Column(db.Text)
+    incridents=db.relationship('PricingIncridents', backref='pricing', lazy=True)
+    
+class PricingIncridents(db.Model):
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    pricing_incrident_id=db.Column(db.Integer,db.ForeignKey('pricing.id'))
+    

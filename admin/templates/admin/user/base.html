@@ -93,7 +93,10 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
-                          
+                            <a class="profile-pic" href="{{url_for('admin.admin_profile')}}">
+                                <img src="{{url_for('.static',filename='plugins/images/users/varun.jpg')}}" alt="user-img" width="36"
+                                    class="img-circle"><span class="text-white font-medium">Steave</span>
+                            </a>
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url_for('auth.auth_logout')}}">
                                     <span class="hide-menu font-medium">Logout</span>
                                 </a>
@@ -114,8 +117,38 @@
         <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item pt-2">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url_for('admin.admin_profile')}}"
+                                aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/settings"
+                                aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Settings</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/task"
+                                aria-expanded="false">
+                                <i class=" far fa-envelope" aria-hidden="true"></i>
+                                <span class="hide-menu">Tasks</span>
+                            </a>
+                        </li>
+                    </ul>
             
-         {% include 'admin/includes/navbar.html' %}
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+      
             <!-- End Sidebar scroll-->
         </aside>
         <!-- ============================================================== -->
@@ -141,7 +174,9 @@
 
              {% block content %} {% endblock  %}
 
-          {% include 'admin/includes/footer.html' %}
+             <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
+                href="https://www.wrappixel.com/">wrappixel.com</a>
+            </footer>
 
 
          <!-- ============================================================== -->

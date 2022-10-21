@@ -1,15 +1,31 @@
 from admin.imports import *
 
 
-@admin_bp.route('/')
+@admin_bp.route('/',methods=['GET','POST'])
 @login_required
 def admin_index():
-    return render_template('admin/index.html')
+    from run import db
+    from models import Users
+    users=Users.query.all()
+    user=current_user
+    return render_template('admin/index.html',users=users,user=user)
 
-@admin_bp.route('/profile')
+@admin_bp.route('/delete/<int:id>',methods=['GET','POST'])
+def admin_users_delete(id):
+    from run import db
+    from models import Users
+    users=Users.query.get(id)
+    db.session.delete(users)
+    db.session.commit()
+    return redirect('/admin')
+
+@admin_bp.route('/profile',methods=['GET','POST'])
 @login_required
 def admin_profile():
-    return render_template('admin/profile.html')
+    from run import db
+    from models import Users
+    users=Users.query.all()
+    return render_template('admin/user/profile.html',users=users)
 
 @admin_bp.route('/message',methods=['GET','POST'])
 @login_required
@@ -65,8 +81,9 @@ def admin_service_delete(id):
 def admin_navbarlink_create():
     navbarLinkForm=NavbarLinkForm()
     from run import db
-    from models import NavBar
+    from models import NavBar,Users
     navbarlinks=NavBar.query.all()
+    users=Users.query.all()
     if request.method=='POST':
         navbar=NavBar( navbar_name=navbarLinkForm.navbar_name.data, navbar_url=navbarLinkForm.navbar_url.data,
                        navbar_order=navbarLinkForm.navbar_order.data,is_active=navbarLinkForm.is_active.data
@@ -74,7 +91,7 @@ def admin_navbarlink_create():
         db.session.add(navbar)
         db.session.commit()
         return redirect('/admin/navbarlink')
-    return render_template('admin/navbarlink.html',navbarLinkForm=navbarLinkForm,navbarlinks=navbarlinks)
+    return render_template('admin/navbarlink.html',navbarLinkForm=navbarLinkForm,navbarlinks=navbarlinks,users=users)
 
 
 @admin_bp.route('/navbarlink/delete/<int:id>',methods=['GET','POST'])

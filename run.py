@@ -19,7 +19,7 @@ ckeditor = CKEditor(main)
 @login_manager.user_loader
 def load_user(user_id):
     from models import Users
-    return Users.query.get(int(user_id))
+    return Users.query.get(user_id)
 
 @login_manager.unauthorized_handler
 def unauthorized():

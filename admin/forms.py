@@ -81,3 +81,7 @@ class PricingForm(FlaskForm):
     price =IntegerField('price')
     incridents =TextAreaField('FeatureText')
     submit=SubmitField('Add pricing')
+    
+    
+class PricingIncridentForm(FlaskForm):
+    pricing_incrident_id=IntegerField('incrident id')
