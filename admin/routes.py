@@ -29,10 +29,15 @@ def admin_users_approved(id):
 
 @admin_bp.route('/profile',methods=['GET','POST'])
 def admin_profile():
-    from run import db
+    import json,os
+    from run import db,main
     from models import Users
+    filename = os.path.join(main.config["UPLOAD_FOLDER"], 'countries.json')
+    country_file=open(filename)
+    countries=json.load(country_file)
+    print(countries)
     users=Users.query.all()
-    return render_template('admin/user/profile.html',users=users)
+    return render_template('admin/user/profile.html',users=users,countries=countries)
 
 @admin_bp.route('/message',methods=['GET','POST'])
 @login_required

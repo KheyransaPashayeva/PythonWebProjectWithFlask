@@ -12,5 +12,4 @@ class RegisterForm(FlaskForm):
     user_email=EmailField('Email')
     password=PasswordField('Password')
     user_info=TextAreaField('Info')
-    country=StringField('user country')
     submit=SubmitField('Register')

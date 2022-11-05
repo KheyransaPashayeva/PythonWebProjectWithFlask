@@ -41,7 +41,7 @@ def auth_register():
         if(re.search(r'[A-Z][a-z]', password) and len(password) >2 and len(password)< 10):
             
             user=Users( user_name=registerForm.user_name.data,user_email=registerForm.user_email.data,
-                        password=password,user_info=registerForm.user_info.data,country=registerForm.country.data
+                        password=password,user_info=registerForm.user_info.data
                       )
             db.session.add(user)
         db.session.commit()

@@ -83,11 +83,10 @@
 
                                         <div class="col-sm-12 border-bottom">
                                             <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
+                                                {% for country in countries %}
+                                                <option>{{country["name"]}}</option>
+                                                {% endfor %}
+                                                
                                             </select>
                                         </div>
                                     </div>

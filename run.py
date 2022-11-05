@@ -31,19 +31,18 @@ def unauthorized():
 from app import app_bp
 from admin import admin_bp
 from auth import auth_bp
-from api.routes import api
+
 
 #register app
 main.register_blueprint(app_bp)
 main.register_blueprint(admin_bp)
 main.register_blueprint(auth_bp)
-main.register_blueprint(api)
+
 
 #import routes
 from app.routes import *
 from admin.routes import *
 from auth.routes import *
-from api.routes import *
 from models import *
 
 
