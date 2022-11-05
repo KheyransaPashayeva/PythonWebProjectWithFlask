@@ -1,6 +1,7 @@
 from run import main,db
 import datetime
 from flask_login import UserMixin
+from run import ma
 
 #contactdan geden msjlar
 class Messages(db.Model):
@@ -69,12 +70,19 @@ class Services(db.Model):
     
 class Users(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    user_name = db.Column(db.String(80), unique=True, nullable=False)
-    user_email = db.Column(db.String(120),unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
+    user_name = db.Column(db.String(80), unique=True)
+    user_email = db.Column(db.String(120),unique=True)
+    password = db.Column(db.String(120))
     user_info =db.Column(db.Text)
+    country= db.Column(db.String(120))
     is_authorized=db.Column(db.Boolean)
     
+class UsersSchema(ma.SQLAlchemySchema):
+   class Meta:
+       model: Users
+       fields =('id','user_name','country')
+       include_relationships = True
+          
 class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     feature_title = db.Column(db.String(180))

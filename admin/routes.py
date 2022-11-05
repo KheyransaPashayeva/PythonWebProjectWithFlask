@@ -2,7 +2,6 @@ from admin.imports import *
 
 
 @admin_bp.route('/',methods=['GET','POST'])
-@login_required
 def admin_index():
     from run import db
     from models import Users
@@ -19,8 +18,16 @@ def admin_users_delete(id):
     db.session.commit()
     return redirect('/admin')
 
+@admin_bp.route('/approved/<int:id>',methods=['GET','POST'])
+def admin_users_approved(id):
+    from run import db
+    from models import Users
+    user=Users.query.filter_by(id=id).first()
+    user.is_authorized=True
+    db.session.commit()
+    return redirect(url_for('admin.admin_index'))
+
 @admin_bp.route('/profile',methods=['GET','POST'])
-@login_required
 def admin_profile():
     from run import db
     from models import Users
@@ -38,7 +45,7 @@ def admin_message():
 
 # app indexinde olan service bolmesine yenisini elave etmek
 @admin_bp.route('/service',methods=['GET','POST'])
-@login_required
+
 def admin_service_create():
     serviceForm=ServiceForm()
     from run import db
@@ -77,7 +84,7 @@ def admin_service_delete(id):
 
 # APp de Navbar hissenin dinamikliyi
 @admin_bp.route('/navbarlink',methods=['GET','POST'])
-@login_required
+
 def admin_navbarlink_create():
     navbarLinkForm=NavbarLinkForm()
     from run import db
@@ -107,7 +114,7 @@ def admin_navbarlink_delete(id):
 
 # Team route start
 @admin_bp.route('/team',methods=['GET','POST'])
-@login_required
+
 def admin_team_create():
     teamForm=TeamForm()
     from run import db,main

@@ -115,7 +115,7 @@
                                             <td class="txt-oflo">{{user.user_email}}</td>
                                             <td>
                                                 <a class=" far fa-trash-alt" style="color:red; margin:10px"   href="{{url_for('admin.admin_users_delete',id=user.id)}}"> Delete </a>
-                                                <a class=" far fa-edit"   href='/admin/user/update/{{user.id}}'> Update </a>
+                                                <a class=" far fa-edit"   href={{url_for('admin.admin_users_approved',id=user.id)}}>Approved </a>
                                             <td>
                           
                                         </tr>
