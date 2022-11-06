@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,EmailField,DateField,PasswordField,SubmitField,TextAreaField,IntegerField,BooleanField,FileField
+from wtforms import StringField,EmailField,DateField,PasswordField,SubmitField,TextAreaField,IntegerField,BooleanField,FileField,SelectField
 
 class LoginForm(FlaskForm):
     user_email=EmailField('Email')

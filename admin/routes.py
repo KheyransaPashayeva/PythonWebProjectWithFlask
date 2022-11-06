@@ -29,15 +29,30 @@ def admin_users_approved(id):
 
 @admin_bp.route('/profile',methods=['GET','POST'])
 def admin_profile():
-    import json,os
     from run import db,main
     from models import Users
     filename = os.path.join(main.config["UPLOAD_FOLDER"], 'countries.json')
-    country_file=open(filename)
-    countries=json.load(country_file)
-    print(countries)
+    countries=open(filename)
+    country_names=json.load(countries)
     users=Users.query.all()
-    return render_template('admin/user/profile.html',users=users,countries=countries)
+    return render_template('admin/user/profile.html',users=users,country_names=country_names)
+
+@admin_bp.route('/profile/update/<int:id>',methods=['GET','POST'])
+def admin_profile_update(id):
+    from run import db,main
+    from models import Users
+    user=Users.query.get(id)
+ 
+    if request.method == ['POST']:
+       user.user_name=request.form['name']
+       user.user_email=request.form['email']
+       user.password=request.form['password']
+       user.user_info=request.form['info']
+       user.country=request.form["country"]
+       db.session.add(user)
+       db.session.commit() 
+    return redirect(url_for('admin.admin_index')) 
+    return render_template('admin/user/profile.html',user=user)
 
 @admin_bp.route('/message',methods=['GET','POST'])
 @login_required

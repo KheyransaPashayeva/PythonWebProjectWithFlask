@@ -21,8 +21,8 @@
                                     <div class="user-content">
                                         <a href="javascript:void(0)"><img src="plugins/images/users/genu.jpg"
                                                 class="thumb-lg img-circle" alt="img"></a>
-                                        <h4 class="text-white mt-2">{{users.user_name}}</h4>
-                                        <h5 class="text-white mt-2">{{users.user_email}}</h5>
+                                        <h4 class="text-white mt-2"> {{users.user_name}}</h4>
+                                        <h5 class="text-white mt-2"> {{users.user_email}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -48,42 +48,36 @@
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Full Name</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" value="{{users.user_name}}"
-                                                class="form-control p-0 border-0"> </div>
+                                            <input type="text" name="name"
+                                                class="form-control p-0 border-0" value="{{user_name}}" > </div>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="example-email" class="col-md-12 p-0">Email</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="email" value="{{users.user_email}}"
-                                                class="form-control p-0 border-0" name="example-email"
+                                            <input type="email" value="{{user_email}}"
+                                                class="form-control p-0 border-0" name="email"
                                                 id="example-email">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Password</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="password" value="{{users.password}}"  class="form-control p-0 border-0">
+                                            <input type="password" name="password" value="{{password}}"  class="form-control p-0 border-0">
                                         </div>
                                     </div>
+                            
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone No</label>
+                                        <label class="col-md-12 p-0">Info</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control p-0 border-0">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Message</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <textarea rows="5" class="form-control p-0 border-0"></textarea>
+                                            <input  type="textarea" rows="5" class="form-control p-0 border-0" name="info">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label class="col-sm-12">Select Country</label>
 
                                         <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                {% for country in countries %}
+                                            <select class="form-select shadow-none p-0 border-0 form-control-line" name="country">
+                                                {% for country in country_names %}
                                                 <option>{{country["name"]}}</option>
                                                 {% endfor %}
                                                 
@@ -92,7 +86,7 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
+                                            <input type="submit" value="Update" class="btn btn-success" >
                                         </div>
                                     </div>
                                 </form>

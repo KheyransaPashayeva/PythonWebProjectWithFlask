@@ -95,7 +95,7 @@
                         <li>
                             <a class="profile-pic" href="{{url_for('admin.admin_profile')}}">
                                 <img src="{{url_for('.static',filename='plugins/images/users/varun.jpg')}}" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span>
+                                    class="img-circle"><span class="text-white font-medium">{{user_name}}</span>
                             </a>
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url_for('auth.auth_logout')}}">
                                     <span class="hide-menu font-medium">Logout</span>
